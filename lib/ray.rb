@@ -1,4 +1,5 @@
 require "ray/version"
+require "ray/array"
 
 module Ray
   class Application
