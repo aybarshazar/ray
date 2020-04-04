@@ -7,7 +7,10 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    minitest (5.14.0)
     rack (2.2.2)
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     rake (10.5.0)
 
 PLATFORMS
@@ -15,6 +18,8 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.17)
+  minitest (~> 5.14)
+  rack-test (~> 1.1)
   rake (~> 10.0)
   ray!
 
