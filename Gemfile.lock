@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    ray (0.0.1)
+      rack (~> 2.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rack (2.2.2)
+    rake (10.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.17)
+  rake (~> 10.0)
+  ray!
+
+BUNDLED WITH
+   1.17.2
