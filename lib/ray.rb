@@ -1,5 +1,7 @@
 require "ray/version"
 require "ray/routing"
+require "ray/util"
+require "ray/dependencies"
 require "ray/array"
 
 module Ray
