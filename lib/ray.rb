@@ -2,6 +2,7 @@ require "ray/version"
 require "ray/routing"
 require "ray/util"
 require "ray/dependencies"
+require "ray/controller"
 
 module Ray
   class Application
@@ -19,16 +20,6 @@ module Ray
         { "Content-Type" => "text/html" },
         [text]
       ]
-    end
-  end
-
-  class Controller
-    def initialize(env)
-      @env = env
-    end
-
-    def env
-      @env
     end
   end
 end
