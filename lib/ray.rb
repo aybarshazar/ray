@@ -3,6 +3,7 @@ require "ray/routing"
 require "ray/util"
 require "ray/dependencies"
 require "ray/controller"
+require "ray/file_model"
 
 module Ray
   class Application

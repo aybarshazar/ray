@@ -3,6 +3,7 @@ PATH
   specs:
     ray (0.0.5)
       erubis (~> 2.7)
+      multi_json (~> 1.14)
       rack (~> 2.2)
 
 GEM
@@ -10,6 +11,7 @@ GEM
   specs:
     erubis (2.7.0)
     minitest (5.14.0)
+    multi_json (1.14.1)
     rack (2.2.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)

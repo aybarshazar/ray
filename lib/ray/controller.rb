@@ -1,7 +1,10 @@
 require "erubis"
+require "ray/file_model"
 
 module Ray
   class Controller
+    include Ray::Model
+
     def initialize(env)
       @env = env
     end
