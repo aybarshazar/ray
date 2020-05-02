@@ -9,15 +9,31 @@ module Ray
       @env = env
     end
 
-    def env
-      @env
+    def request
+      @request ||= Rack::Request.new(@env)
+    end
+
+    def response(text, status = 200, headers = {})
+      body = [text].flatten
+      Rack::Response.new(body, status, headers)
+    end
+
+    def params
+      request.params
     end
 
     def render(view_name)
+      text = render_view(view_name)
+      status = 200
+      headers = { "Content-Type" => "text/html" }
+      response(text, status, headers)
+    end
+
+    def render_view(view_name)
       filename = File.join("app", "views", controller_name, "#{view_name}.html.erb")
       template = File.read(filename)
       eruby = Erubis::Eruby.new(template)
-      eruby.result(view_variables.merge(:env => env))
+      eruby.result(view_variables)
     end
 
     def controller_name
@@ -28,7 +44,7 @@ module Ray
 
     def view_variables
       vars = {}
-      (instance_variables - [:@env]).each do |variable|
+      instance_variables.each do |variable|
         vars[variable] = instance_variable_get(variable)
       end
       vars

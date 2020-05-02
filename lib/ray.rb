@@ -14,12 +14,12 @@ module Ray
 
       klass, action = get_controller_and_action(env)
       controller = klass.new(env)
-      text = controller.send(action)
+      response = controller.send(action)
 
       [
-        200,
-        { "Content-Type" => "text/html" },
-        [text]
+        response.status,
+        response.headers,
+        [response.body].flatten
       ]
     end
   end
