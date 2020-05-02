@@ -14,7 +14,13 @@ module Ray
 
       klass, action = get_controller_and_action(env)
       controller = klass.new(env)
-      response = controller.send(action)
+      controller.send(action)
+      response = controller.get_response
+
+      unless response
+        controller.render(action.to_sym)
+        response = controller.get_response
+      end
 
       [
         response.status,
