@@ -1,4 +1,3 @@
-require "erubis"
 require "ray/file_model"
 
 module Ray
@@ -40,8 +39,9 @@ module Ray
     def render_view(view_name)
       filename = File.join("app", "views", controller_name, "#{view_name}.html.erb")
       template = File.read(filename)
-      eruby = Erubis::Eruby.new(template)
-      eruby.result(view_variables)
+      view = View.new
+      view.set_vars(view_variables)
+      view.evaluate(template)
     end
 
     def controller_name
