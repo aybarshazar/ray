@@ -29,6 +29,8 @@ module Ray
       response(text, status, headers)
     end
 
+    private
+
     def render_view(view_name)
       filename = File.join("app", "views", controller_name, "#{view_name}.html.erb")
       template = File.read(filename)
