@@ -5,6 +5,7 @@ PATH
       erubis (~> 2.7)
       multi_json (~> 1.14)
       rack (~> 2.2)
+      sqlite3 (~> 1.4)
 
 GEM
   remote: https://rubygems.org/
@@ -16,6 +17,7 @@ GEM
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rake (13.0.1)
+    sqlite3 (1.4.2)
 
 PLATFORMS
   ruby
