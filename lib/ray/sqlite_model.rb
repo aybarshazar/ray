@@ -29,6 +29,11 @@ module Ray
         self.new(data)
       end
 
+      def self.count
+        sql = "SELECT COUNT(*) FROM #{table};"
+        DB.execute(sql)[0][0]
+      end
+
       def self.to_sql(val)
         case val
         when NilClass
