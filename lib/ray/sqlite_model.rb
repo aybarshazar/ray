@@ -10,6 +10,15 @@ module Ray
         @hash = data
       end
 
+      def self.find(id)
+        row = DB.execute <<~SQL
+          SELECT #{schema.keys.join(", ")} FROM #{table} WHERE id = #{id};
+        SQL
+
+        data = Hash[schema.keys.zip(row[0])]
+        self.new(data)
+      end
+
       def self.create(values)
         values.delete("id")
         keys = schema.keys - ["id"]
@@ -32,6 +41,14 @@ module Ray
       def self.count
         sql = "SELECT COUNT(*) FROM #{table};"
         DB.execute(sql)[0][0]
+      end
+
+      def [](name)
+        @hash[name.to_s]
+      end
+
+      def []=(name, value)
+        @hash[name.to_s] = value
       end
 
       def self.to_sql(val)
