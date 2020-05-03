@@ -6,7 +6,7 @@ DB = SQLite3::Database.new "ray.db"
 module Ray
   module Model
     class SQLite
-      def initialize(data = nil)
+      def initialize(data = {})
         @hash = data
       end
 
@@ -41,6 +41,25 @@ module Ray
       def self.count
         sql = "SELECT COUNT(*) FROM #{table};"
         DB.execute(sql)[0][0]
+      end
+
+      def save
+        self.save! rescue false
+      end
+
+      def save!
+        unless @hash["id"]
+          self.class.create(@hash)
+          return true
+        end
+
+        fields = @hash.map do |k, v|
+          "#{k}=#{self.class.to_sql(v)}"
+        end.join(", ")
+
+        DB.execute <<~SQL
+          UPDATE #{self.class.table} SET #{fields} WHERE id = #{@hash["id"]}
+        SQL
       end
 
       def [](name)
