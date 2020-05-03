@@ -96,6 +96,34 @@ module Ray
         end
         @schema
       end
+
+      def method_missing(message, *args)
+        # reader
+        if @hash[message.to_s]
+          self.class.class_eval do
+            define_method(message) do
+              self[message]
+            end
+          end
+
+          return self[message]
+        end
+
+        # writer
+        if message.to_s[-1] == "="
+          attr_name = message.to_s[0..-2]
+
+          self.class.class_eval do
+            define_method(message) do |value|
+              self[attr_name] = value
+            end
+          end
+
+          return self[attr_name] = args[0]
+        end
+
+        super
+      end
     end
   end
 end
