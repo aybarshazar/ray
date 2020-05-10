@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ray (0.0.7)
+    ray (0.0.8)
       erubis (~> 2.7)
       multi_json (~> 1.14)
       rack (~> 2.2)
