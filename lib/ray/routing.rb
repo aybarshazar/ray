@@ -40,6 +40,10 @@ module Ray
       )
     end
 
+    def root(path, options = {})
+      match("/", path, options)
+    end
+
     def check_url(url)
       @rules.each do |rule|
         match_data = rule[:regexp].match(url)
