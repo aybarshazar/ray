@@ -13,21 +13,8 @@ module Ray
         return [404, { "Content-Type" => "text/html" }, []]
       end
 
-      klass, action = get_controller_and_action(env)
-      controller = klass.new(env)
-      controller.send(action)
-      response = controller.get_response
-
-      unless response
-        controller.render(action.to_sym)
-        response = controller.get_response
-      end
-
-      [
-        response.status,
-        response.headers,
-        [response.body].flatten
-      ]
+      rack_app = get_rack_app(env)
+      rack_app.call(env)
     end
   end
 end

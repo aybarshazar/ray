@@ -6,6 +6,27 @@ module Ray
 
     def initialize(env)
       @env = env
+      @routing_params = {}
+    end
+
+    def self.action(action, routing_params = {})
+      proc { |env| self.new(env).dispatch(action, routing_params) }
+    end
+
+    def dispatch(action, routing_params = {})
+      @routing_params = routing_params
+      self.send(action)
+      response = get_response
+      unless response
+        render(action.to_sym)
+        response = get_response
+      end
+
+      [
+        response.status,
+        response.headers,
+        [response.body].flatten
+      ]
     end
 
     def request
@@ -24,7 +45,7 @@ module Ray
     end
 
     def params
-      request.params
+      request.params.merge(@routing_params)
     end
 
     def render(view_name)
