@@ -7,7 +7,21 @@ require "ray/view"
 require "ray/file_model"
 
 module Ray
+  @application = nil
+
+  def self.application
+    @application
+  end
+
+  def self.application=(app)
+    @application = app
+  end
+
   class Application
+    def initialize
+      Ray.application = self
+    end
+
     def call(env)
       if env["PATH_INFO"] == "/favicon.ico"
         return [404, { "Content-Type" => "text/html" }, []]
